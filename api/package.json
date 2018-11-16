@@ -16,7 +16,8 @@
     "test": "npm run lint && NODE_ENV=testing mocha --require @babel/register --exit test/",
     "coverage": "nyc npm run test",
     "clean": "rm -rf dist/*",
-    "build": "npm run clean && babel ./src -s -d dist"
+    "build": "npm run clean && babel ./src -s -d dist",
+    "serve": "NODE_ENV=production node ./dist/index.js"
   },
   "dependencies": {
     "config": "^2.0.1",
