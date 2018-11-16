@@ -14,18 +14,20 @@
     "dev": "NODE_ENV=development nodemon -w src -x 'npm run lint && babel-node src/index.js'",
     "lint": "eslint --ext .js src test --fix",
     "test": "npm run lint && NODE_ENV=testing mocha --require @babel/register --exit test/",
-    "coverage": "nyc npm run test"
+    "coverage": "nyc npm run test",
+    "clean": "rm -rf dist/*",
+    "build": "npm run clean && babel ./src -s -d dist"
   },
   "dependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.6",
-    "@babel/preset-env": "^7.1.6",
     "config": "^2.0.1",
     "express": "^4.16.4",
     "express-winston": "^3.0.1",
     "winston": "^3.1.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
     "@babel/node": "^7.0.0",
     "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
