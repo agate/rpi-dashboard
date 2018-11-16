@@ -21,6 +21,7 @@ const initApp = () => new Promise((resolve) => {
     level: 'verbose',
   }));
 
+  app.use(express.json());
   app.use('/api', api({ logger }));
 
   resolve(app);
