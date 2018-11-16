@@ -12,12 +12,14 @@
     "lint": "eslint --ext .js src --fix"
   },
   "dependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
     "config": "^2.0.1",
     "express": "^4.16.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-latest-node": "^2.0.2",
+    "@babel/node": "^7.0.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
