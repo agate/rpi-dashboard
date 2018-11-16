@@ -2,6 +2,7 @@ import express from 'express';
 import expressWinston from 'express-winston';
 import { createLogger, format, transports } from 'winston';
 import config from 'config';
+import api from './api';
 
 const logger = createLogger({
   format: format.combine(
@@ -20,9 +21,7 @@ const initApp = () => new Promise((resolve) => {
     level: 'verbose',
   }));
 
-  app.get('/api/hello', (req, res) => res.json({
-    result: 'Hello, world.',
-  }));
+  app.use('/api', api({ logger }));
 
   resolve(app);
 });
