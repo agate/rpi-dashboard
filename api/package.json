@@ -3,13 +3,18 @@
   "version": "0.1.0",
   "description": "Backend api for Raspberry Pi Dashboard",
   "main": "src/index.js",
-  "repository": "https://github.com/aguegu/rpi-dashboard.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aguegu/rpi-dashboard.git"
+  },
   "author": "aGuegu <weihong.guan@gmail.com>",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "NODE_ENV=development nodemon -w src -x 'yarn run lint && babel-node src/index.js'",
-    "lint": "eslint --ext .js src --fix"
+    "dev": "NODE_ENV=development nodemon -w src -x 'npm run lint && babel-node src/index.js'",
+    "lint": "eslint --ext .js src test --fix",
+    "test": "npm run lint && NODE_ENV=testing mocha --require @babel/register --exit test/",
+    "coverage": "nyc npm run test"
   },
   "dependencies": {
     "@babel/cli": "^7.1.5",
@@ -22,9 +27,28 @@
   },
   "devDependencies": {
     "@babel/node": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "nodemon": "^1.18.6"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.6",
+    "nyc": "^13.1.0"
+  },
+  "bugs": {
+    "url": "https://github.com/aguegu/rpi-dashboard/issues"
+  },
+  "homepage": "https://github.com/aguegu/rpi-dashboard#readme",
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "raspberrypi",
+    "gpio"
+  ],
+  "nyc": {
+    "include": "src"
   }
 }

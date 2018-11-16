@@ -20,8 +20,8 @@ const initApp = () => new Promise((resolve) => {
     level: 'verbose',
   }));
 
-  app.get('/', (req, res) => res.json({
-    result: 'Hello World!',
+  app.get('/api/hello', (req, res) => res.json({
+    result: 'Hello, world.',
   }));
 
   resolve(app);
@@ -40,3 +40,5 @@ if (['development', 'production'].includes(process.env.NODE_ENV)) {
     }
   })();
 }
+
+export default initApp;
