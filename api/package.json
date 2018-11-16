@@ -1,0 +1,26 @@
+{
+  "name": "rpi-dashboard-api",
+  "version": "0.1.0",
+  "description": "Backend api for Raspberry Pi Dashboard",
+  "main": "src/index.js",
+  "repository": "https://github.com/aguegu/rpi-dashboard.git",
+  "author": "aGuegu <weihong.guan@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon -w src -x 'yarn run lint && babel-node src/index.js'",
+    "lint": "eslint --ext .js src --fix"
+  },
+  "dependencies": {
+    "config": "^2.0.1",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-latest-node": "^2.0.2",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "nodemon": "^1.18.6"
+  }
+}
