@@ -2,6 +2,9 @@ import express from 'express';
 import expressWinston from 'express-winston';
 import { createLogger, format, transports } from 'winston';
 import config from 'config';
+import lowdb from 'lowdb';
+import path from 'path';
+import FileSync from 'lowdb/adapters/FileSync';
 import api from './api';
 
 const logger = createLogger({
@@ -21,8 +24,24 @@ const initApp = () => new Promise((resolve) => {
     level: 'verbose',
   }));
 
+  const adapter = new FileSync(path.join(process.cwd(), config.get('db')));
+  const db = lowdb(adapter);
+
+  db.defaults({
+    gpios: [],
+  }).write();
+
   app.use(express.json());
-  app.use('/api', api({ logger }));
+  app.use('/api', api({ logger, db }));
+
+  app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+    if (err.message === 'Validation failed') {
+      res.status(400).json({ errors: err.mapped() });
+    } else {
+      logger.warn(err.stack);
+      res.status(400).json({ msg: err.message });
+    }
+  });
 
   resolve(app);
 });

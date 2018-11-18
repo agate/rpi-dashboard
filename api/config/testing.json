@@ -1,3 +1,4 @@
 {
-  "logLevel": "debug"
+  "logLevel": "debug",
+  "db": "../usr/db-testing.json"
 }
