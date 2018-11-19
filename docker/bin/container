@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+SERVICE_NAME=dashboard
+CONTAINER_NAME=${SERVICE_NAME}_container
+
+echo "cleanup container"
+docker rm -f $CONTAINER_NAME 2>&1 > /dev/null
+echo "starting container"
+docker-compose run --rm --service-ports --name $CONTAINER_NAME -d $SERVICE_NAME tail -f /dev/null

@@ -1,0 +1,18 @@
+version: '3'
+volumes:
+  dashboard-node-modules: { driver: local }
+services:
+  dashboard:
+    image: node:10
+    working_dir: /dashboard
+    volumes:
+      - ./api:/dashboard
+      - dashboard-node-modules:/dashboard/node_modules
+    ports:
+      - "8000:8000"
+  dashboard_prod:
+    image: rpi-dashboard
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.prod
+    working_dir: /dashboard

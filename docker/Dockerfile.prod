@@ -1,0 +1,15 @@
+FROM node:10 as builder
+
+WORKDIR /dashboard
+
+ADD api/ ./
+
+RUN npm install
+RUN npm run build
+
+FROM astefanutti/scratch-node:10
+
+COPY --from=builder /dashboard /
+
+ENV NODE_ENV production
+ENTRYPOINT ["/node", "/dist/index.js"]

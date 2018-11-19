@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+SERVICE_NAME=dashboard
+CONTAINER_NAME=${SERVICE_NAME}_container
+
+docker exec -it $CONTAINER_NAME bash $@
