@@ -10,7 +10,7 @@
           <v-card-title primary-title>{{ d.title }}</v-card-title>
           <v-card-text>GPIO#{{ d.pin }} - {{ d.direction }}</v-card-text>
           <v-card-actions>
-            <v-switch v-model="d.value" :true-value="1" :false-value="0" @change="postPin(i)"></v-switch>
+            <v-switch v-model="d.value" :true-value="1" :false-value="0" @change="postPin(i)" :label="d.value.toString()"></v-switch>
             <v-spacer />
             <v-btn color="error" flat @click="deleteDetail(i)" icon><v-icon>delete</v-icon></v-btn>
           </v-card-actions>

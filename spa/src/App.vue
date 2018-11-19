@@ -1,25 +1,6 @@
 <template>
 <v-app>
-  <v-navigation-drawer v-model="drawer" fixed clipped app dark>
-    <v-list>
-      <v-list-tile :to="{ name: 'gpios' }">
-        <v-list-tile-action>
-          <v-icon>home</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>GPIO</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-      <v-list-tile :to="{ name: 'about' }">
-        <v-list-tile-action>
-          <v-icon>info</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>About</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-    </v-list>
-  </v-navigation-drawer>
+  <SideNav :drawer="drawer"/>
   <v-toolbar fixed app dark clipped-left>
     <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     <v-toolbar-title>RPi Dashboard &nbsp;<span class="font-weight-light">@{{ hostname }}</span></v-toolbar-title>
@@ -31,10 +12,15 @@
 </template>
 
 <script>
+import SideNav from '@/components/SideNav.vue';
+
 export default {
   name: 'App',
+  components: {
+    SideNav,
+  },
   data: () => ({
-    drawer: null,
+    drawer: false,
     hostname: '',
   }),
   async mounted() {
