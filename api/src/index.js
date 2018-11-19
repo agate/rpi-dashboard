@@ -6,6 +6,7 @@ import lowdb from 'lowdb';
 import path from 'path';
 import FileSync from 'lowdb/adapters/FileSync';
 import api from './api';
+import { AppError } from './api/utils';
 
 const logger = createLogger({
   format: format.combine(
@@ -35,11 +36,19 @@ const initApp = () => new Promise((resolve) => {
   app.use('/api', api({ logger, db }));
 
   app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-    if (err.message === 'Validation failed') {
+    if (err.message === 'Validation failed') { // express-validator Validation failure
       res.status(400).json({ errors: err.mapped() });
     } else {
       logger.warn(err.stack);
-      res.status(400).json({ msg: err.message });
+      if (err instanceof AppError) {
+        res.status(err.status);
+        if (err.payload) {
+          res.json(err.payload);
+        }
+        res.end();
+      } else {
+        res.status(500).json({ msg: err.message });
+      }
     }
   });
 
